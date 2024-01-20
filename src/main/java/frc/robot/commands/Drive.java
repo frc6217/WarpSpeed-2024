@@ -33,7 +33,6 @@ public class Drive extends Command {
     this.swerveDrivetrain = swerveDrivetrain;
     this.cJoystick = commandJoystick;
     governor = (double) 1;
-    SmartDashboard.putData("Teleop Drive", this);
     
   }
 
@@ -48,7 +47,7 @@ public class Drive extends Command {
     
     governor = (-(cJoystick.getThrottle()-1)/2);
     // Negative on the Angle
-    swerveDrivetrain.drive(new Translation2d(getStrafe(), getTranslation()).times(governor*Constants.RobotConstants.driveMaxVelo), getRotation()*(Constants.RobotConstants.rotationMaxAngleVelo*governor));
+    swerveDrivetrain.drive(new Translation2d(getTranslation(), getStrafe()).times(governor*Constants.RobotConstants.driveMaxVelo), getRotation()*(Constants.RobotConstants.rotationMaxAngleVelo*governor));
     SmartDashboard.putNumber("Drive Governor", governor);
     SmartDashboard.putNumber("Pigeon Angle", swerveDrivetrain.getAngle());
   }
@@ -61,14 +60,6 @@ public class Drive extends Command {
   @Override
   public boolean isFinished() {
     return false;
-  }
-
-  @Override
-  public void initSendable(SendableBuilder builder) {
-    builder.setSmartDashboardType("DriveCommand");
-    builder.addDoubleProperty("Strafe: ", this::getStrafe, null);
-    builder.addDoubleProperty("Translation: ", this::getTranslation, null);
-    builder.addDoubleProperty("Rotation: ", this::getRotationRaw, null);
   }
 
   private double getStrafe() {

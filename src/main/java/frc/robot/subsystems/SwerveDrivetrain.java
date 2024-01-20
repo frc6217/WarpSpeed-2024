@@ -56,12 +56,22 @@ public class SwerveDrivetrain extends SubsystemBase {
 
     pigeon2.reset();
     
+    /*
+     * POSITIVE X IS FORWARD
+     * POSITIVE Y IS LEFT
+     * NEGITIVE X IS BACKWARD
+     * NEGITIVE Y IS RIGHT
+     */
     cSpeeds = new ChassisSpeeds(0, 0, 0);
     sKinematics = new SwerveDriveKinematics(new Translation2d(Constants.RobotConstants.trackWidth/2, Constants.RobotConstants.trackLength/2),
                                             new Translation2d(Constants.RobotConstants.trackWidth/2, -Constants.RobotConstants.trackLength/2),
                                             new Translation2d(-Constants.RobotConstants.trackWidth/2, Constants.RobotConstants.trackLength/2),
                                             new Translation2d(-Constants.RobotConstants.trackWidth/2, -Constants.RobotConstants.trackLength/2));
-    modules = new SwerveModule[]{backLeftModule, backRightModule, frontLeftModule, frontRightModule};
+    modules = new SwerveModule[4];
+    modules[frontLeftModule.operationOrderID] = frontLeftModule;
+    modules[frontRightModule.operationOrderID] = frontRightModule;
+    modules[backLeftModule.operationOrderID] = backLeftModule;
+    modules[backRightModule.operationOrderID] = backRightModule;
     sOdometry = new SwerveDriveOdometry(sKinematics, getGyroRotation2d(), getModulePositions(), new Pose2d(0, 0, new Rotation2d()));
   }
 
@@ -82,7 +92,7 @@ public class SwerveDrivetrain extends SubsystemBase {
 
   public void drive(Translation2d desiredTranslation, double desiredRotation){
     
-    cSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(desiredTranslation.getX(), desiredTranslation.getY(), desiredRotation, getGyroRotation2d().times(-1));
+    cSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(desiredTranslation.getX(), desiredTranslation.getY(), desiredRotation, getGyroRotation2d());
     //SwerveModuleState[] states = sKinematics.toSwerveModuleStates(cSpeeds);
   
    // cSpeeds = new ChassisSpeeds(t2D.getX(), t2D.getY() , desiredRotation.getRadians());
@@ -99,6 +109,7 @@ public class SwerveDrivetrain extends SubsystemBase {
     SmartDashboard.putNumber("Desired Rotation: (RPS)", desiredRotation);
     SmartDashboard.putNumber("cSpeeds Y", cSpeeds.vyMetersPerSecond);
     
+
     for(SwerveModule module : modules){
       module.setState(states[module.operationOrderID]);
     }
@@ -168,7 +179,7 @@ public class SwerveDrivetrain extends SubsystemBase {
     if (controller == USER_CONTROLLER.JOYSTICK){
       SmartDashboard.putString("current drive controller", "xbox");
       controller = USER_CONTROLLER.XBOX;
-          this.setDefaultCommand(new Drive(this, () -> -cx.getLeftY(), () -> -cx.getRightX(), () -> cx.getLeftX(), cj));     
+          this.setDefaultCommand(new Drive(this, () -> -cx.getLeftX(), () -> -cx.getRightX(), () -> -cx.getLeftY(), cj));     
     } else if(controller == USER_CONTROLLER.XBOX){
             SmartDashboard.putString("current drive controller", "joystick");
           this.setDefaultCommand(new Drive(this, () -> -cj.getY(), () -> -cj.getZ(), () -> cj.getX(), cj));

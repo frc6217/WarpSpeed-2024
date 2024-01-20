@@ -52,8 +52,8 @@ public class SwerveModule extends SubsystemBase{
     driveMotor.restoreFactoryDefaults();
     steerMotor.restoreFactoryDefaults();
 
-    driveMotor.setInverted(true);
-    steerMotor.setInverted(true);
+    driveMotor.setInverted(false);
+    steerMotor.setInverted(false);
 
     //absEncoder = new BBAbsoluteEncoder(steerMotor);
     
