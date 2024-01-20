@@ -31,7 +31,7 @@ public class SwerveDrivetrain extends SubsystemBase {
   public final  SwerveModule backRightModule;// = new SwerveModule(Constants.RobotConstants.backRight);
   public final SwerveModule frontLeftModule;// = new SwerveModule(Constants.RobotConstants.frontLeft);
 
-  public final Pigeon2 pigeon2 = new Pigeon2(50,"CTRSwerve");
+  public final Pigeon2 pigeon2 = new Pigeon2(50);
   public SwerveDriveOdometry sOdometry;
   public SwerveDriveKinematics sKinematics;
   public SwerveModule[] modules;
