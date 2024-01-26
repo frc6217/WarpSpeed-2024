@@ -6,7 +6,9 @@ package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkAbsoluteEncoder;
+import com.revrobotics.SparkAnalogSensor;
 import com.revrobotics.SparkAbsoluteEncoder.Type;
+import com.revrobotics.SparkAnalogSensor.Mode;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import frc.robot.interfaces.IEncoder;
@@ -14,21 +16,26 @@ import frc.robot.interfaces.IEncoder;
 /** Add your docs here. */
 public class BBAbsoluteEncoder implements IEncoder{
     SparkAbsoluteEncoder encoder;
-    BBAbsoluteEncoder(CANSparkMax motor){
-        encoder = motor.getAbsoluteEncoder(Type.kDutyCycle);
+    double offset;
+    SparkAnalogSensor analogSensor;
+    BBAbsoluteEncoder(CANSparkMax motor, double offset){
+        //encoder = motor.getAbsoluteEncoder(Type.kDutyCycle);
+        analogSensor = motor.getAnalog(Mode.kAbsolute);
+        this.offset = offset;
     }
 
 
     @Override
     public double getRawValue() {
         // TODO Auto-generated method stub
-        return encoder.getPosition();
+        return analogSensor.getPosition();
     }
 
     @Override
     public Rotation2d getAngle() {
         // TODO Auto-generated method stub
-        return Rotation2d.fromDegrees(encoder.getPosition());
+        //Scales 3.3 to 360
+        return Rotation2d.fromDegrees((getRawValue()*109.1)-offset);
     }
 
 }

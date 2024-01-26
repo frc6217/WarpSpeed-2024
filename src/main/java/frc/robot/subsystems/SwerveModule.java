@@ -38,7 +38,7 @@ public class SwerveModule extends SubsystemBase{
   double driveSetpoint = 0;
   SparkPIDController steerPID;
   double steerSetpoint = 0;
- // IEncoder absEncoder;
+  IEncoder absEncoder;
   String name;
   int operationOrderID;
   double absEncoderOffset;
@@ -55,7 +55,7 @@ public class SwerveModule extends SubsystemBase{
     driveMotor.setInverted(false);
     steerMotor.setInverted(false);
 
-    //absEncoder = new BBAbsoluteEncoder(steerMotor);
+    absEncoder = new BBAbsoluteEncoder(steerMotor, constants.absEncoderOffset);
     
     driveEncoder = driveMotor.getEncoder();
     steerEncoder = steerMotor.getEncoder();
@@ -77,7 +77,7 @@ public class SwerveModule extends SubsystemBase{
   
     // old swerve
     steerEncoder.setPositionConversionFactor((2 * Math.PI) / 58.3); // gear ratio 58
-    steerEncoder.setPosition(0);
+    steerEncoder.setPosition(absEncoder.getAngle().getRadians());
 //todo make drive pid work
     drivePID.setP(0);
     drivePID.setI(0);
@@ -199,8 +199,8 @@ public class SwerveModule extends SubsystemBase{
     // if we aren't adjusting steering AND some time passed (5sec maybe)
     // then get ABS enc value and set it to relative postion (with conversion?)
     SmartDashboard.putNumber(name + " Wheel Angle", Math.toDegrees(getSteerPosition()));
-    //SmartDashboard.putNumber(name + " Absolute Encoder", absEncoder.getAngle().getDegrees());
-   // SmartDashboard.putNumber(name + " Absolute Encoder Raw Value: ", absEncoder.getRawValue());
+    SmartDashboard.putNumber(name + " Absolute Encoder", absEncoder.getAngle().getDegrees());
+   //SmartDashboard.putNumber(name + " Absolute Encoder Raw Value: ", absEncoder.getRawValue());
     SmartDashboard.putNumber(name + " Steer Setpoints", Math.toDegrees(steerSetpoint));
     
     SmartDashboard.putNumber(name + "RPM of Motor", driveMotor.getEncoder().getVelocity());
