@@ -59,6 +59,9 @@ public class SwerveModule extends SubsystemBase{
     
     driveEncoder = driveMotor.getEncoder();
     steerEncoder = steerMotor.getEncoder();
+
+    driveEncoder.setPositionConversionFactor(2/42.50737);
+
     drivePID = driveMotor.getPIDController();
 
     steerPID = steerMotor.getPIDController();
