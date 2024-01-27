@@ -11,7 +11,9 @@ import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.FindKS;
 import frc.robot.commands.ResetDriveTrain;
 import frc.robot.commands.UserControllerSwitch;
+import frc.robot.subsystems.CAN_dle;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.LazerCAN;
 import frc.robot.subsystems.SwerveDrivetrain;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -37,7 +39,8 @@ public class RobotContainer {
 
   //public final SwerveDrivetrain swerveDrivetrain = new SwerveDrivetrain(mJoystick,m_driverController);
   public final SwerveDrivetrain swerveDrivetrain = new SwerveDrivetrain(mJoystick, m_driverController);
-
+  public final LazerCAN lazer = new LazerCAN();
+  public final CAN_dle C = new CAN_dle();
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
