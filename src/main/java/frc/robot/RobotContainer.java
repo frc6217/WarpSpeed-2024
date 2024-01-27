@@ -9,9 +9,11 @@ import frc.robot.commands.Autos;
 import frc.robot.commands.Drive;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.FindKS;
+import frc.robot.commands.FollowApriltagw;
 import frc.robot.commands.ResetDriveTrain;
 import frc.robot.commands.UserControllerSwitch;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.SwerveDrivetrain;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -37,7 +39,8 @@ public class RobotContainer {
 
   //public final SwerveDrivetrain swerveDrivetrain = new SwerveDrivetrain(mJoystick,m_driverController);
   public final SwerveDrivetrain swerveDrivetrain = new SwerveDrivetrain(mJoystick, m_driverController);
-
+  public final Limelight ll = new Limelight();
+  
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
@@ -46,8 +49,8 @@ public class RobotContainer {
     SmartDashboard. putData(new UserControllerSwitch(swerveDrivetrain));
     
     //SmartDashboard.putData("Reset Drive System", new ResetDriveTrain(swerveDrivetrain));
-    m_driverController.button(1).onTrue(new FindKS(swerveDrivetrain.frontRightModule.driveMotor, swerveDrivetrain));
-
+    //m_driverController.button(1).onTrue(new FindKS(swerveDrivetrain.frontRightModule.driveMotor, swerveDrivetrain));
+    mJoystick.button(12).whileTrue(new FollowApriltagw(swerveDrivetrain, ll));
   }
 
   /*
@@ -61,7 +64,7 @@ public class RobotContainer {
    */
   private void configureBindings() {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-   
+   m_driverController.a().whileTrue(new FollowApriltagw(swerveDrivetrain, ll));
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
