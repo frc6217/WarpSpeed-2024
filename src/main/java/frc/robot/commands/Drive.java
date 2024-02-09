@@ -47,7 +47,7 @@ public class Drive extends Command {
     
     governor = (-(cJoystick.getThrottle()-1)/2);
     // Negative on the Angle
-    swerveDrivetrain.drive(new Translation2d(getTranslation(), getStrafe()).times(governor*Constants.RobotConstants.driveMaxVelo), getRotation()*(Constants.RobotConstants.rotationMaxAngleVelo*governor));
+    swerveDrivetrain.drive(new Translation2d(getTranslation(), getStrafe()).times(governor*Constants.RobotConstants.driveMaxVelo), getRotation()*(Constants.RobotConstants.rotationMaxAngleVelo*governor*.7));
     SmartDashboard.putNumber("Drive Governor", governor);
     SmartDashboard.putNumber("Pigeon Angle", swerveDrivetrain.getAngle());
   }

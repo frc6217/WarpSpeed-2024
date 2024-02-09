@@ -39,7 +39,7 @@ public class RobotContainer {
 
   //public final SwerveDrivetrain swerveDrivetrain = new SwerveDrivetrain(mJoystick,m_driverController);
   public final SwerveDrivetrain swerveDrivetrain = new SwerveDrivetrain(mJoystick, m_driverController);
-  public final Limelight ll = new Limelight();
+  //public final Limelight ll = new Limelight();
   
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -50,7 +50,7 @@ public class RobotContainer {
     
     //SmartDashboard.putData("Reset Drive System", new ResetDriveTrain(swerveDrivetrain));
     //m_driverController.button(1).onTrue(new FindKS(swerveDrivetrain.frontRightModule.driveMotor, swerveDrivetrain));
-    mJoystick.button(12).whileTrue(new FollowApriltagw(swerveDrivetrain, ll));
+    //mJoystick.button(12).whileTrue(new FollowApriltagw(swerveDrivetrain, ll));
   }
 
   /*
@@ -64,7 +64,7 @@ public class RobotContainer {
    */
   private void configureBindings() {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-   m_driverController.a().whileTrue(new FollowApriltagw(swerveDrivetrain, ll));
+   //m_driverController.a().whileTrue(new FollowApriltagw(swerveDrivetrain, ll));
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
