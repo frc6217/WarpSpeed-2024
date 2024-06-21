@@ -54,8 +54,6 @@ public class Drive extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    //TODO add Deadband, add Govenor
-    
     if(isXMode == true) {
       //check joystick input
       //if get whatever == 0 AND next == 0 AND 

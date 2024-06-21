@@ -48,13 +48,6 @@ public class SwerveDrivetrain extends SubsystemBase {
   public SwerveModule[] modules;
   public ChassisSpeeds cSpeeds;
 
-  public enum USER_CONTROLLER {
-    JOYSTICK,
-    XBOX
-  }
-  public CommandJoystick cj;
-  public CommandXboxController cx;
-  public USER_CONTROLLER controller = USER_CONTROLLER.JOYSTICK;
   public AllianceSelector allianceSelector;
   public boolean isAbsolute = true;
 
@@ -62,7 +55,6 @@ public class SwerveDrivetrain extends SubsystemBase {
   LimeLightLocal limeLight;
   public SwerveDrivetrain(CommandXboxController cx, LimeLightLocal limeLight) {
 
-    this.cx = cx;
     this.limeLight = limeLight;
     SmartDashboard.putNumber("Auto xPID P", 0.1);
     SmartDashboard.putNumber("Auto yPID P", 0.1);
@@ -129,13 +121,8 @@ public class SwerveDrivetrain extends SubsystemBase {
             },
             this // Reference to this subsystem to set requirements
     );
-
-
-
-
-
-
   }
+
   public void initialize(){
     for(SwerveModule module : modules){
       module.initializeEncoder();
@@ -159,8 +146,6 @@ public class SwerveDrivetrain extends SubsystemBase {
   private SwerveModulePosition[] getModulePositions(){
     SwerveModulePosition[] sPosition = new SwerveModulePosition[4];
     for(SwerveModule module : modules){
-      //todo remove when module is back
-      //if (module.operationOrderID != Constants.RobotConstants.backLeft.position)
       sPosition[module.operationOrderID] = module.getModulePosition();
     }
     return sPosition;
@@ -169,8 +154,6 @@ public class SwerveDrivetrain extends SubsystemBase {
   private SwerveModuleState[] getModuleStates() {
       SwerveModuleState[] sPosition = new SwerveModuleState[4];
     for(SwerveModule module : modules){
-      //todo remove when module is back
-      //if (module.operationOrderID != Constants.RobotConstants.backLeft.position)
       sPosition[module.operationOrderID] = module.getModuleState();
     }
     return sPosition;
@@ -200,23 +183,7 @@ public class SwerveDrivetrain extends SubsystemBase {
 
   public void absoluteDrive(Translation2d desiredTranslation, double desiredRotation){
     cSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(desiredTranslation.getX(), desiredTranslation.getY(), desiredRotation, getGyroRotation2d());
-    //SwerveModuleState[] states = sKinematics.toSwerveModuleStates(cSpeeds);
-  
-   // cSpeeds = new ChassisSpeeds(t2D.getX(), t2D.getY() , desiredRotation.getRadians());
-    
-    // cSpeeds.vxMetersPerSecond = desiredTranslation.getX();
-    // cSpeeds.vyMetersPerSecond = desiredTranslation.getY();
-    // cSpeeds.omegaRadiansPerSecond = desiredRotation.getRadians();
-    
-    //cSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(cSpeeds, getGyroRotation2d());
-    
     SwerveModuleState[] states = sKinematics.toSwerveModuleStates(cSpeeds);
-    // SmartDashboard.putNumber("Desired X", desiredTranslation.getX());
-    // SmartDashboard.putNumber("Desired Y", desiredTranslation.getY());
-    // SmartDashboard.putNumber("Desired Rotation: (RPS)", desiredRotation);
-    // SmartDashboard.putNumber("cSpeeds Y", cSpeeds.vyMetersPerSecond);
-    ///SmartDashboard.putNumber("get Angle Pigeon: ", this.getAngle());
-    
     for(SwerveModule module : modules){
       module.setState(states[module.operationOrderID]);
     }
@@ -336,7 +303,8 @@ public class SwerveDrivetrain extends SubsystemBase {
   public void setPigeonAngle(double angle){
     pigeon2.setYaw(angle);
   }
-    public void reset() {
+
+  public void reset() {
     pigeon2.reset();
     frontLeftModule.driveEncoder.setPosition(0);
     frontRightModule.driveEncoder.setPosition(0);
