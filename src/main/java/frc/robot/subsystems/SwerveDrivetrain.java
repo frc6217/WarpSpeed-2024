@@ -11,6 +11,8 @@ import com.pathplanner.lib.util.PIDConstants;
 import com.pathplanner.lib.util.ReplanningConfig;
 
 import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.VecBuilder;
+import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -41,7 +43,7 @@ public class SwerveDrivetrain extends SubsystemBase {
   public final SwerveModule frontLeftModule;// = new SwerveModule(Constants.RobotConstants.frontLeft);
 
   public final Pigeon2 pigeon2 = new Pigeon2(50,"CTRSwerve");
-  public SwerveDriveOdometry sOdometry;
+  public SwerveDrivePoseEstimator sOdometry;
   public SwerveDriveKinematics sKinematics;
   public SwerveModule[] modules;
   public ChassisSpeeds cSpeeds;
@@ -57,11 +59,11 @@ public class SwerveDrivetrain extends SubsystemBase {
   public boolean isAbsolute = true;
 
   public Governor governor = new Governor();
- 
-  public SwerveDrivetrain(CommandXboxController cx) {
+  LimeLightLocal limeLight;
+  public SwerveDrivetrain(CommandXboxController cx, LimeLightLocal limeLight) {
 
     this.cx = cx;
-
+    this.limeLight = limeLight;
     SmartDashboard.putNumber("Auto xPID P", 0.1);
     SmartDashboard.putNumber("Auto yPID P", 0.1);
     SmartDashboard.putNumber("Auto rotationPID P", 0);
@@ -88,7 +90,7 @@ public class SwerveDrivetrain extends SubsystemBase {
     modules[frontRightModule.operationOrderID] = frontRightModule;
     modules[backLeftModule.operationOrderID] = backLeftModule;
     modules[backRightModule.operationOrderID] = backRightModule;
-    sOdometry = new SwerveDriveOdometry(sKinematics, getGyroRotation2d(), getModulePositions(), new Pose2d(0, 0, new Rotation2d(0)));
+    sOdometry = new SwerveDrivePoseEstimator(sKinematics, getGyroRotation2d(), getModulePositions(), new Pose2d(0, 0, new Rotation2d(0)));
     frontLeftModule.driveEncoder.setPosition(0);
     frontRightModule.driveEncoder.setPosition(0);
     backLeftModule.driveEncoder.setPosition(0);
@@ -244,6 +246,66 @@ public class SwerveDrivetrain extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     sOdometry.update(getGyroRotation2d(), getModulePositions());
+    if(limeLight.getBlueEstimate().tagCount >= 2)
+   {
+     sOdometry.setVisionMeasurementStdDevs(VecBuilder.fill(.7,.7,9999999));
+     sOdometry.addVisionMeasurement(
+         limeLight.getBlueEstimate().pose,
+         limeLight.getBlueEstimate().timestampSeconds);
+   }
+   /*
+    * boolean useMegaTag2 = true; //set to false to use MegaTag1
+    boolean doRejectUpdate = false;
+    if(useMegaTag2 == false)
+    {
+      LimelightHelpers.PoseEstimate mt1 = LimelightHelpers.getBotPoseEstimate_wpiBlue("limelight");
+      
+      if(mt1.tagCount == 1 && mt1.rawFiducials.length == 1)
+      {
+        if(mt1.rawFiducials[0].ambiguity > .7)
+        {
+          doRejectUpdate = true;
+        }
+        if(mt1.rawFiducials[0].distToCamera > 3)
+        {
+          doRejectUpdate = true;
+        }
+      }
+      if(mt1.tagCount == 0)
+      {
+        doRejectUpdate = true;
+      }
+
+      if(!doRejectUpdate)
+      {
+        m_poseEstimator.setVisionMeasurementStdDevs(VecBuilder.fill(.5,.5,9999999));
+        m_poseEstimator.addVisionMeasurement(
+            mt1.pose,
+            mt1.timestampSeconds);
+      }
+    }
+    else if (useMegaTag2 == true)
+    {
+      LimelightHelpers.SetRobotOrientation("limelight", m_poseEstimator.getEstimatedPosition().getRotation().getDegrees(), 0, 0, 0, 0, 0);
+      LimelightHelpers.PoseEstimate mt2 = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2("limelight");
+      if(Math.abs(m_gyro.getRate()) > 720) // if our angular velocity is greater than 720 degrees per second, ignore vision updates
+      {
+        doRejectUpdate = true;
+      }
+      if(mt2.tagCount == 0)
+      {
+        doRejectUpdate = true;
+      }
+      if(!doRejectUpdate)
+      {
+        m_poseEstimator.setVisionMeasurementStdDevs(VecBuilder.fill(.7,.7,9999999));
+        m_poseEstimator.addVisionMeasurement(
+            mt2.pose,
+            mt2.timestampSeconds);
+      }
+    }
+  }
+    */
    // SmartDashboard.putNumber("Gyro Angle", getGyroRotation2d().getDegrees());
    // SmartDashboard.putNumber("Pigeon getYaw Value: ", getAngle());
     // SmartDashboard.putNumber("Odometry pose X: ", Units.metersToFeet(sOdometry.getPoseMeters().getX()));
@@ -294,7 +356,7 @@ public class SwerveDrivetrain extends SubsystemBase {
   // path planner functions
 
   public Pose2d getPose(){
-    return sOdometry.getPoseMeters();
+    return sOdometry.getEstimatedPosition();
   }
 
   public void resetPose(Pose2d pose){

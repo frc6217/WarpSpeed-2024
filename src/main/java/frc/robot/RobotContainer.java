@@ -34,6 +34,7 @@ import frc.robot.sensors.HopperBeamBreak;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.LimeLightLocal;
 import frc.robot.subsystems.LimeLightSub;
 import frc.robot.subsystems.PIDShooter;
 import frc.robot.subsystems.ServoTest;
@@ -83,8 +84,8 @@ public class RobotContainer {
   public final HopperBeamBreak hopperBeamBreak = new HopperBeamBreak();
   public final FirstBeamBreak firstBeamBreak = new FirstBeamBreak();
 
-
-  public final SwerveDrivetrain swerveDrivetrain = new SwerveDrivetrain(m_driverController);
+  public final LimeLightLocal limeLightLocal = new LimeLightLocal("limelight-shooter", 20);
+  public final SwerveDrivetrain swerveDrivetrain = new SwerveDrivetrain(m_driverController, limeLightLocal);
   public final Intake intake = new Intake(swerveDrivetrain, hopperBeamBreak);
   public final ThirdIntakeWheels thirdIntakeWheels = new ThirdIntakeWheels();
   public final PIDShooter shooter = new PIDShooter();

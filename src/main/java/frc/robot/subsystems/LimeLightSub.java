@@ -67,11 +67,6 @@ public class LimeLightSub extends SubsystemBase {
     tid = table.getEntry("tid");
     tv = table.getEntry("tv");
 
-    targetSkew = table.getEntry("ts");
-    double x = tx.getDouble(0.0);
-    double y = ty.getDouble(0.0);
-    double area = ta.getDouble(0.0);
-
     //post to smart dashboard periodically
     // SmartDashboard.putNumber(name + " X", x);
     // SmartDashboard.putNumber(name + " Y", y);
