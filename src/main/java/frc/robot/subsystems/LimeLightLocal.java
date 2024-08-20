@@ -8,6 +8,7 @@ import edu.wpi.first.net.PortForwarder;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.helpers.LimelightHelpers;
 
@@ -30,7 +31,8 @@ public class LimeLightLocal extends SubsystemBase {
   }
   @Override
   public void periodic() {
-    blueEstimate = LimelightHelpers.getBotPoseEstimate_wpiBlue("limelight");
+    blueEstimate = LimelightHelpers.getBotPoseEstimate_wpiBlue(name);
+    SmartDashboard.putNumber("kaf;dlkj;kl", blueEstimate.pose.getX());
 
     // This method will be called once per scheduler run
   }

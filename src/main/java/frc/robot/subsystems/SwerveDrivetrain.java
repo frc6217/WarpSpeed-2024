@@ -13,6 +13,7 @@ import com.pathplanner.lib.util.ReplanningConfig;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
+import edu.wpi.first.math.filter.Debouncer;
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -32,6 +33,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants;
 import frc.robot.Constants.RobotConstants;
 import frc.robot.commands.Drive;
+import frc.robot.helpers.LimelightHelpers;
 
 
 public class SwerveDrivetrain extends SubsystemBase {
@@ -47,6 +49,9 @@ public class SwerveDrivetrain extends SubsystemBase {
   public SwerveDriveKinematics sKinematics;
   public SwerveModule[] modules;
   public ChassisSpeeds cSpeeds;
+  public Debouncer debouncer = new Debouncer(.2);
+  public double x = 0;
+  public double y = 0;
 
   public AllianceSelector allianceSelector;
   public boolean isAbsolute = true;
@@ -222,9 +227,10 @@ public class SwerveDrivetrain extends SubsystemBase {
    }
    /*
     * boolean useMegaTag2 = true; //set to false to use MegaTag1
+    
+    if(useMegaTag2 == false) */
     boolean doRejectUpdate = false;
-    if(useMegaTag2 == false)
-    {
+    {}
       LimelightHelpers.PoseEstimate mt1 = LimelightHelpers.getBotPoseEstimate_wpiBlue("limelight");
       
       if(mt1.tagCount == 1 && mt1.rawFiducials.length == 1)
@@ -244,15 +250,30 @@ public class SwerveDrivetrain extends SubsystemBase {
       }
 
       if(!doRejectUpdate)
-      {
+      {/*
         m_poseEstimator.setVisionMeasurementStdDevs(VecBuilder.fill(.5,.5,9999999));
         m_poseEstimator.addVisionMeasurement(
             mt1.pose,
             mt1.timestampSeconds);
+          mt1.pose.getX();*/
       }
-    }
+      
+      
+      if(mt1.tagCount == 0){
+        x = x;
+        y = y;
+      }else{
+        if(debouncer.calculate(mt1.tagCount == 1)){
+        x =  LimelightHelpers.getBotPose2d_wpiRed("limelight").getX();
+        y = LimelightHelpers.getBotPose2d_wpiRed("limelight").getY()-2.69
+        ;
+        }
+      }
+      SmartDashboard.putNumber("limelight X",Units.metersToFeet(x));
+      SmartDashboard.putNumber("limelight Y",Units.metersToFeet(y));
+    } /*
     else if (useMegaTag2 == true)
-    {
+    
       LimelightHelpers.SetRobotOrientation("limelight", m_poseEstimator.getEstimatedPosition().getRotation().getDegrees(), 0, 0, 0, 0, 0);
       LimelightHelpers.PoseEstimate mt2 = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2("limelight");
       if(Math.abs(m_gyro.getRate()) > 720) // if our angular velocity is greater than 720 degrees per second, ignore vision updates
@@ -278,7 +299,7 @@ public class SwerveDrivetrain extends SubsystemBase {
     // SmartDashboard.putNumber("Odometry pose X: ", Units.metersToFeet(sOdometry.getPoseMeters().getX()));
     // SmartDashboard.putNumber("Odometry pose Y: ", Units.metersToFeet(sOdometry.getPoseMeters().getY()));
 
-  }
+  
 
   public void enableBrakes(){
     for(SwerveModule module: modules){

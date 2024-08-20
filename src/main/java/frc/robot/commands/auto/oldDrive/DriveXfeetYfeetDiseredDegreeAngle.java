@@ -103,8 +103,8 @@ public class DriveXfeetYfeetDiseredDegreeAngle extends Command {
   public void execute() {
 
 
-    double outputTranslation = xPidController.calculate(Units.metersToFeet(sDrivetrain.sOdometry.getPoseMeters().getX()));
-    double outputStrafe = yPidController.calculate(Units.metersToFeet(sDrivetrain.sOdometry.getPoseMeters().getY()));
+    double outputTranslation = xPidController.calculate(Units.metersToFeet(sDrivetrain.sOdometry.getEstimatedPosition().getX()));
+    double outputStrafe = yPidController.calculate(Units.metersToFeet(sDrivetrain.sOdometry.getEstimatedPosition().getY()));
     double outputRotation = rotationPidController.calculate(sDrivetrain.getAngle());
 
 
@@ -120,8 +120,8 @@ public class DriveXfeetYfeetDiseredDegreeAngle extends Command {
     SmartDashboard.putNumber("Auto Strafe Setpoint", ySetpoint);
     SmartDashboard.putNumber("Auto Rotation Setpoint", rotationSetpoint);
 
-    SmartDashboard.putNumber("Auto Translation Current", Units.metersToFeet(sDrivetrain.sOdometry.getPoseMeters().getX()));
-    SmartDashboard.putNumber("Auto Strafe Current", Units.metersToFeet(sDrivetrain.sOdometry.getPoseMeters().getY()));
+    SmartDashboard.putNumber("Auto Translation Current", Units.metersToFeet(sDrivetrain.sOdometry.getEstimatedPosition().getX()));
+    SmartDashboard.putNumber("Auto Strafe Current", Units.metersToFeet(sDrivetrain.sOdometry.getEstimatedPosition().getY()));
     SmartDashboard.putNumber("Auto Rotation Current", sDrivetrain.getAngle());
 
     SmartDashboard.putNumber("Auto Translation P", xPidController.getP());
@@ -140,8 +140,8 @@ public class DriveXfeetYfeetDiseredDegreeAngle extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    boolean val1 = Math.abs(Units.metersToFeet(sDrivetrain.sOdometry.getPoseMeters().getX()) - xSetpoint) < .4; 
-    boolean val2 = Math.abs(Units.metersToFeet(sDrivetrain.sOdometry.getPoseMeters().getY()) - ySetpoint) < .4;
+    boolean val1 = Math.abs(Units.metersToFeet(sDrivetrain.sOdometry.getEstimatedPosition().getX()) - xSetpoint) < .4; 
+    boolean val2 = Math.abs(Units.metersToFeet(sDrivetrain.sOdometry.getEstimatedPosition().getY()) - ySetpoint) < .4;
     boolean val3 = Math.abs(sDrivetrain.getAngle() - rotationSetpoint) < 6;
     return val1 && val2 && val3 ;
   }

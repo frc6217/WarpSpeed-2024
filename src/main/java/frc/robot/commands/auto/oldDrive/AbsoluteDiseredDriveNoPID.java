@@ -69,17 +69,17 @@ public class AbsoluteDiseredDriveNoPID extends Command {
     SmartDashboard.putNumber("Current Angle Wrapping", currentAngle);
     currentAngle = sDrivetrain.getWrapedAngle();
 
-    if(Math.abs(Units.metersToFeet(sDrivetrain.sOdometry.getPoseMeters().getX()) - xSetpoint) < .4){
+    if(Math.abs(Units.metersToFeet(sDrivetrain.sOdometry.getEstimatedPosition().getX()) - xSetpoint) < .4){
       outputTranslation = 0;
-    }else if((Units.metersToFeet(sDrivetrain.sOdometry.getPoseMeters().getX()) - xSetpoint) > .2){
+    }else if((Units.metersToFeet(sDrivetrain.sOdometry.getEstimatedPosition().getX()) - xSetpoint) > .2){
       outputTranslation = -.6;
     }else{
       outputTranslation = .6;
     }
 
-    if(Math.abs(Units.metersToFeet(sDrivetrain.sOdometry.getPoseMeters().getY()) - ySetpoint) < .4){
+    if(Math.abs(Units.metersToFeet(sDrivetrain.sOdometry.getEstimatedPosition().getY()) - ySetpoint) < .4){
       outputStrafe = 0;
-    }else if((Units.metersToFeet(sDrivetrain.sOdometry.getPoseMeters().getY()) - ySetpoint) > .2){
+    }else if((Units.metersToFeet(sDrivetrain.sOdometry.getEstimatedPosition().getY()) - ySetpoint) > .2){
       outputStrafe = -.6;
     }else{
       outputStrafe = .6;
@@ -115,8 +115,8 @@ public class AbsoluteDiseredDriveNoPID extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    boolean val1 = Math.abs(Units.metersToFeet(sDrivetrain.sOdometry.getPoseMeters().getX()) - xSetpoint) < .2; 
-    boolean val2 = Math.abs(Units.metersToFeet(sDrivetrain.sOdometry.getPoseMeters().getY()) - ySetpoint) < .2;
+    boolean val1 = Math.abs(Units.metersToFeet(sDrivetrain.sOdometry.getEstimatedPosition().getX()) - xSetpoint) < .2; 
+    boolean val2 = Math.abs(Units.metersToFeet(sDrivetrain.sOdometry.getEstimatedPosition().getY()) - ySetpoint) < .2;
     boolean val3 = Math.abs(currentAngle - rotationSetpoint) < 5;
     return val1 && val2 && val3 ;
   }

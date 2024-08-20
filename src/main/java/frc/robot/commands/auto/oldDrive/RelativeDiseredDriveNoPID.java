@@ -58,8 +58,8 @@ public class RelativeDiseredDriveNoPID extends Command {
     }else {
       rotationSetpoint = sDrivetrain.getAngle();
     }
-    double initialX = Units.metersToFeet(sDrivetrain.sOdometry.getPoseMeters().getX());
-    double initialY = Units.metersToFeet(sDrivetrain.sOdometry.getPoseMeters().getY());
+    double initialX = Units.metersToFeet(sDrivetrain.sOdometry.getEstimatedPosition().getX());
+    double initialY = Units.metersToFeet(sDrivetrain.sOdometry.getEstimatedPosition().getY());
    
     xSetpoint = xSetpoint + initialX;
     ySetpoint = ySetpoint + initialY;
@@ -72,17 +72,17 @@ public class RelativeDiseredDriveNoPID extends Command {
   @Override
   public void execute() {
 
-    if(Math.abs(Units.metersToFeet(sDrivetrain.sOdometry.getPoseMeters().getX()) - xSetpoint) < .4){
+    if(Math.abs(Units.metersToFeet(sDrivetrain.sOdometry.getEstimatedPosition().getX()) - xSetpoint) < .4){
       outputTranslation = 0;
-    }else if((Units.metersToFeet(sDrivetrain.sOdometry.getPoseMeters().getX()) - xSetpoint) > .4){
+    }else if((Units.metersToFeet(sDrivetrain.sOdometry.getEstimatedPosition().getX()) - xSetpoint) > .4){
       outputTranslation = -.4;
     }else{
       outputTranslation = .4;
     }
 
-    if(Math.abs(Units.metersToFeet(sDrivetrain.sOdometry.getPoseMeters().getY()) - ySetpoint) < .4){
+    if(Math.abs(Units.metersToFeet(sDrivetrain.sOdometry.getEstimatedPosition().getY()) - ySetpoint) < .4){
       outputStrafe = 0;
-    }else if((Units.metersToFeet(sDrivetrain.sOdometry.getPoseMeters().getY()) - ySetpoint) > .4){
+    }else if((Units.metersToFeet(sDrivetrain.sOdometry.getEstimatedPosition().getY()) - ySetpoint) > .4){
       outputStrafe = -.4;
     }else{
       outputStrafe = .4;
@@ -119,8 +119,8 @@ public class RelativeDiseredDriveNoPID extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    boolean val1 = Math.abs(Units.metersToFeet(sDrivetrain.sOdometry.getPoseMeters().getX()) - xSetpoint) < .4; 
-    boolean val2 = Math.abs(Units.metersToFeet(sDrivetrain.sOdometry.getPoseMeters().getY()) - ySetpoint) < .4;
+    boolean val1 = Math.abs(Units.metersToFeet(sDrivetrain.sOdometry.getEstimatedPosition().getX()) - xSetpoint) < .4; 
+    boolean val2 = Math.abs(Units.metersToFeet(sDrivetrain.sOdometry.getEstimatedPosition().getY()) - ySetpoint) < .4;
     boolean val3 = Math.abs(sDrivetrain.getAngle() - rotationSetpoint) < 5;
     return val1 && val2 && val3 ;
   }
