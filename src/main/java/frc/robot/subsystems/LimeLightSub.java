@@ -72,7 +72,7 @@ public class LimeLightSub extends SubsystemBase {
     // SmartDashboard.putNumber(name + " Y", y);
     // SmartDashboard.putNumber(name + " Area", area);
     // SmartDashboard.putNumber(name + " skew", targetSkew.getDouble(0));
-    // SmartDashboard.putBoolean(name + " seetarget", (tv.getDouble(0)) != 0);
+     SmartDashboard.putBoolean(name + " seetarget", (tv.getDouble(0)) != 0);
   }
 
   public double getArea(){
@@ -92,6 +92,7 @@ public class LimeLightSub extends SubsystemBase {
 
   public boolean isValid() {
     // check and returns tv
+    SmartDashboard.putNumber(name + " V", tv.getDouble(0));
     return (tv.getDouble(0) > .5);
   }
 

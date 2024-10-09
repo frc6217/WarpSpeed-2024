@@ -281,9 +281,10 @@ public class RobotContainer {
      //PathPlannerAuto auto = new PathPlannerAuto("New Auto");
      //PathPlannerAuto auto = new PathPlannerAuto("OneNote");
      //PathPlannerAuto auto = new PathPlannerAuto("Far Auto"); //todo change to do multiple auto
-     //return autoCommandFactory.AlwaysDo().andThen(auto);
+     PathPlannerAuto auto = new PathPlannerAuto("Testing");
+     return autoCommandFactory.AlwaysDo().andThen(auto);
     // An example command will be run in autonomous
-  return  autoCommandFactory.getAutoCommand();
+  //return  autoCommandFactory.getAutoCommand();
   }
 
   public AutoCommandFactory getAutoCommandFactory() {

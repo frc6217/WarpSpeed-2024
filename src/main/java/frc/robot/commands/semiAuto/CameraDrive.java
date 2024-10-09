@@ -166,7 +166,7 @@ public class CameraDrive extends Command {
       double strafeAmount = strafePidController.calculate(strafeErrorsSupplier.getAsDouble());//todo test strafe vs rotation for X
       strafeAmount = MathUtil.clamp(strafeAmount, -.5, .5); //todo move constants
 
-      drivetrain.relativeDrive(new Translation2d(-translationAmount, strafeAmount*parameters.direction).times(Constants.RobotConstants.driveMaxVelo), rotationAmount*Constants.RobotConstants.rotationMaxAngleVelo);
+      drivetrain.relativeDrive(new Translation2d(translationAmount, strafeAmount*parameters.direction).times(Constants.RobotConstants.driveMaxVelo), -rotationAmount*Constants.RobotConstants.rotationMaxAngleVelo);
     } else {
       drivetrain.stop();
     }

@@ -47,11 +47,11 @@ public final class Constants {
   }
 
   public static class SemiAutoConstants{
-    public static final PIDParameters translationPIDNotePickUp = new PIDParameters(0.2, 0, 0, -18.42, .4);
-    public static final PIDParameters rotationPIDNotePickUp = new PIDParameters(0.0005, 0, 0, 0, 0.4);
+    public static final PIDParameters translationPIDNotePickUp = new PIDParameters(0.03, 0, 0, -2.16, .4);
+    public static final PIDParameters rotationPIDNotePickUp = new PIDParameters(0.001, 0, 0, 0, 0.4);
     public static final PIDParameters strafePIDNotePickUp = new PIDParameters(0.01, 0, 0, -1, 1);
 
-    public static final SemiAutoParameters note = new SemiAutoParameters(TARGET.NOTE, translationPIDNotePickUp, rotationPIDNotePickUp, strafePIDNotePickUp, 1);
+    public static final SemiAutoParameters note = new SemiAutoParameters(TARGET.NOTE, translationPIDNotePickUp, rotationPIDNotePickUp, strafePIDNotePickUp, -1);
 
     public static final PIDParameters translationPIDSpeaker = new PIDParameters(.02, 0, 0, 13.01, 2);
     public static final PIDParameters rotationPIDSpeaker = new PIDParameters(0.0001, 0, 0, 88.2, 4);
@@ -141,8 +141,8 @@ public final class Constants {
     public static double thridIntakeSpeed = 0.5; 
     public static int leftLimitSwitchChannel = 7;
     public static int rightLimitSwitchChannel = 8;
-    public static double intakeDebounceTime = .05;
-    public static double intakeHopperDebounceTime = .5;
+    public static double intakeDebounceTime = .15;
+    public static double intakeHopperDebounceTime = 0.5;
     public static double autoShotDebounceTime = .2;
   
   }

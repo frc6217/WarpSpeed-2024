@@ -264,13 +264,17 @@ public class SwerveDrivetrain extends SubsystemBase {
         y = y;
       }else{
         if(debouncer.calculate(mt1.tagCount == 1)){
-        x =  LimelightHelpers.getBotPose2d_wpiRed("limelight").getX();
-        y = LimelightHelpers.getBotPose2d_wpiRed("limelight").getY()-2.69
+        x =  LimelightHelpers.getBotPose2d_wpiRed("limelight").getX() - 1.44;
+        y = LimelightHelpers.getBotPose2d_wpiRed("limelight").getY() - 2.69;
+    
+        sOdometry.resetPosition(getGyroRotation2d(), getModulePositions(), new Pose2d(x, y, getGyroRotation2d()));
         ;
         }
       }
       SmartDashboard.putNumber("limelight X",Units.metersToFeet(x));
       SmartDashboard.putNumber("limelight Y",Units.metersToFeet(y));
+      SmartDashboard.putNumber("Odometry pose X: ", Units.metersToFeet(sOdometry.getEstimatedPosition().getX()));
+      SmartDashboard.putNumber("Odometry pose Y: ", Units.metersToFeet(sOdometry.getEstimatedPosition().getY()));
     } /*
     else if (useMegaTag2 == true)
     
@@ -296,8 +300,7 @@ public class SwerveDrivetrain extends SubsystemBase {
     */
    // SmartDashboard.putNumber("Gyro Angle", getGyroRotation2d().getDegrees());
    // SmartDashboard.putNumber("Pigeon getYaw Value: ", getAngle());
-    // SmartDashboard.putNumber("Odometry pose X: ", Units.metersToFeet(sOdometry.getPoseMeters().getX()));
-    // SmartDashboard.putNumber("Odometry pose Y: ", Units.metersToFeet(sOdometry.getPoseMeters().getY()));
+    
 
   
 
