@@ -16,16 +16,16 @@
     },
     {
       "anchor": {
-        "x": 2.888390004808514,
-        "y": 6.298343808089041
+        "x": 4.458101077722347,
+        "y": 6.4835892142093074
       },
       "prevControl": {
-        "x": 1.9619772700585316,
-        "y": 6.292328140980275
+        "x": 3.7566466534441068,
+        "y": 5.878412848165334
       },
       "nextControl": {
-        "x": 4.389852770204353,
-        "y": 6.308093566305898
+        "x": 4.955338746782008,
+        "y": 6.912578575750977
       },
       "isLocked": false,
       "linkedName": "Far MidPoint"
@@ -46,10 +46,21 @@
   ],
   "rotationTargets": [],
   "constraintZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "New Event Marker",
+      "waypointRelativePos": 0,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": []
+        }
+      }
+    }
+  ],
   "globalConstraints": {
-    "maxVelocity": 3.0,
-    "maxAcceleration": 3.0,
+    "maxVelocity": 4.4,
+    "maxAcceleration": 7.5,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },

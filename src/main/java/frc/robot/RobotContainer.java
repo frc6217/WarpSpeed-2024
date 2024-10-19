@@ -15,6 +15,7 @@ import frc.robot.commands.ResetGyro;
 import frc.robot.commands.ThirdIntakeCommand;
 import frc.robot.commands.auto.Autos;
 import frc.robot.commands.auto.CameraFindNote;
+import frc.robot.commands.auto.Intake.IntakeUntilBeambreak;
 import frc.robot.commands.auto.oldDrive.AbsoluteDiseredDriveNoPID;
 import frc.robot.commands.auto.oldDrive.AutoCommandFactory;
 import frc.robot.commands.auto.oldDrive.DriveXfeetYfeetDiseredDegreeAngle;
@@ -103,7 +104,7 @@ public class RobotContainer {
 
   public RobotContainer() {
     // Configure the trigger bindings
-    semiAutoFactory = new SemiAutoFactory(this);
+    semiAutoFactory = new SemiAutoFactory(this,hopperBeamBreak);
     autoCommandFactory = new AutoCommandFactory(this, swerveDrivetrain, indexer, intake, shooter,noteFinderLimeLight, semiAutoFactory, thirdIntakeWheels);
     configureBindings();
     SmartDashboard.putData(new PowerDistribution(1, ModuleType.kRev));
@@ -119,12 +120,14 @@ public class RobotContainer {
 
 
     // path planner named commands
-    NamedCommands.registerCommand("autoCameraDriveToNote", autoCameraDriveToNoteCommand);
+    NamedCommands.registerCommand("autoCameraDriveToNote", semiAutoFactory.autoPickupNote());
     NamedCommands.registerCommand("autoShot", autoCommandFactory.doAutoShot());
     NamedCommands.registerCommand("autoIntake", runIntakeUntilNote());
     NamedCommands.registerCommand("autoFindNoteClockWise", autoFindNoteClockWiseCommand);
     NamedCommands.registerCommand("autoFindNoteCounterClockWise", autoFindNoteCounterClockWiseCommand);
+    NamedCommands.registerCommand("shooterStart", autoCommandFactory.shooterStart());
    // NamedCommands.registerCommand("autoSpeakerLineUp", new CameraDrive(swerveDrivetrain, shooterLimeLight, SemiAutoConstants.speaker, this.intake, this.firstBeamBreak));
+
 
 
   }
@@ -221,6 +224,7 @@ public class RobotContainer {
     reverseIntake.and(driverComtrollerAutoPickupButton.negate()).whileTrue(backwardIntakeCommand());
     intake.and(driverComtrollerAutoPickupButton.negate()).whileTrue(forwardIntakeCommand());
 
+      //speakerShooter.onTrue(runIntakeUntilNote());
 
     speakerShooter.whileTrue(Commands.runOnce(shooter::prepareForSpeaker, shooter));
     ampShooter.whileTrue(Commands.runOnce(shooter::prepareForAmp, shooter));

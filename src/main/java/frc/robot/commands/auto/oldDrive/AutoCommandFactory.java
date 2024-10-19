@@ -188,6 +188,11 @@ public class AutoCommandFactory {
       return pCommandGroup;
     }
     
+    public SequentialCommandGroup shooterStart(){
+      SequentialCommandGroup pCommandGroup = new SequentialCommandGroup();
+      pCommandGroup.addCommands(new AutoShootStart(shooter));
+      return pCommandGroup;
+    }
 
     public SequentialCommandGroup doSimpleBackUp(){
         SequentialCommandGroup pCommandGroup = new SequentialCommandGroup();

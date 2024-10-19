@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.382399573915957,
+      "x": 1.386927239412675,
       "y": 5.55472336015897
     },
-    "rotation": 0.0
+    "rotation": 0
   },
   "command": {
     "type": "sequential",
@@ -18,22 +18,15 @@
           }
         },
         {
-          "type": "parallel",
+          "type": "path",
           "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "New New Path"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "autoIntake"
-                }
-              }
-            ]
+            "pathName": "SpeakerToMiddleNote"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "autoCameraDriveToNote"
           }
         },
         {
@@ -49,22 +42,51 @@
           }
         },
         {
-          "type": "parallel",
+          "type": "path",
           "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "New Path"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "autoIntake"
-                }
-              }
-            ]
+            "pathName": "SpeakerStageNote"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "autoCameraDriveToNote"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "StageNoteToSpeaker"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "autoShot"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "SpeakerToAmpNote"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "autoCameraDriveToNote"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "AmpNoteToSpeaker"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "autoShot"
           }
         }
       ]

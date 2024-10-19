@@ -16,12 +16,15 @@ import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.ThirdIntakeCommand;
 import frc.robot.commands.auto.Intake.AutoIntakeEnd;
 import frc.robot.sensors.FirstBeamBreak;
+import frc.robot.sensors.HopperBeamBreak;
 import frc.robot.subsystems.Intake;
 
 /** Add your docs here. */
 public class SemiAutoFactory {
     RobotContainer robot;
-    public SemiAutoFactory(RobotContainer robot){
+    HopperBeamBreak hopperBeamBreak;
+    public SemiAutoFactory(RobotContainer robot, HopperBeamBreak hopperBeamBreak){
+        this.hopperBeamBreak = hopperBeamBreak;
         this.robot = robot;
     }
 
@@ -30,7 +33,10 @@ public class SemiAutoFactory {
     public Command autoPickupNote(){
         ParallelDeadlineGroup group = new ParallelDeadlineGroup(new CameraDrive(robot.swerveDrivetrain, robot.noteFinderLimeLight, Constants.SemiAutoConstants.note, robot.intake, robot.firstBeamBreak),
              new IntakeCommand(robot.intake,.8), new ThirdIntakeCommand(robot.thirdIntakeWheels, RobotConstants.thridIntakeSpeed));
-        return group;
+
+        //ParallelDeadlineGroup intakeUntilBeambreak = new ParallelDeadlineGroup( new IntakeCommand(robot.intake,.8), new ThirdIntakeCommand(robot.thirdIntakeWheels, RobotConstants.thridIntakeSpeed), null)
+        //group.andThen();
+        return (group.andThen(robot.runIntakeUntilNote())).until(hopperBeamBreak::getDebouncedBeamBreak);
     }
 
     //  public ParallelDeadlineGroup speakerGoTo(){

@@ -3,34 +3,52 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.265158439148787,
-        "y": 5.55472336015897
+        "x": 2.137658622110595,
+        "y": 5.547612425391122
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.396951146126267,
-        "y": 5.55472336015897
+        "x": 1.9036644249060484,
+        "y": 5.537862667174266
       },
       "isLocked": false,
       "linkedName": "MiddleNotes2"
     },
     {
       "anchor": {
-        "x": 1.4649253051475237,
-        "y": 5.55472336015897
+        "x": 1.4844248215812361,
+        "y": 5.547612425391122
       },
       "prevControl": {
-        "x": 2.2741552371465805,
-        "y": 5.547612425391122
+        "x": 1.884164908472336,
+        "y": 5.557362183607978
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Speaker"
     }
   ],
   "rotationTargets": [],
   "constraintZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "New Event Marker",
+      "waypointRelativePos": 0,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "shooterStart"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
   "globalConstraints": {
     "maxVelocity": 3.0,
     "maxAcceleration": 3.0,

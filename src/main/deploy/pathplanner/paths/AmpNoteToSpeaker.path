@@ -3,16 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.2839049953634363,
-        "y": 4.280143857199829
+        "x": 2.147408380327451,
+        "y": 6.776081960714992
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.332653786447717,
-        "y": 5.255119678885439
+        "x": 2.0986595892431703,
+        "y": 5.771856864378813
       },
       "isLocked": false,
-      "linkedName": "Stage Note"
+      "linkedName": "AmpNote"
     },
     {
       "anchor": {
@@ -20,8 +20,8 @@
         "y": 5.547612425391122
       },
       "prevControl": {
-        "x": 2.2546557207128677,
-        "y": 5.333117744620287
+        "x": 2.293654753580292,
+        "y": 6.113098401968776
       },
       "nextControl": null,
       "isLocked": false,
@@ -63,7 +63,7 @@
   "reversed": false,
   "folder": null,
   "previewStartingState": {
-    "rotation": 0.0,
+    "rotation": 0,
     "velocity": 0
   },
   "useDefaultConstraints": true

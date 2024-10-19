@@ -3,59 +3,75 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.3940937283583965,
-        "y": 5.5196408968316515
+        "x": 1.4844248215812361,
+        "y": 5.547612425391122
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.037272222692593,
-        "y": 6.221290163378048
+        "x": 2.4204016103963824,
+        "y": 5.5378626671796685
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Speaker"
     },
     {
       "anchor": {
-        "x": 3.194993512494147,
-        "y": 7.285458217640082
+        "x": 2.137658622110595,
+        "y": 5.547612425391122
       },
       "prevControl": {
-        "x": 2.5050384003901907,
-        "y": 6.630585568863445
+        "x": 2.1669078967611637,
+        "y": 5.547612425396523
+      },
+      "nextControl": {
+        "x": 1.3186208996755746,
+        "y": 5.547612425239883
+      },
+      "isLocked": false,
+      "linkedName": "MiddleNotes2"
+    },
+    {
+      "anchor": {
+        "x": 1.4844248215812361,
+        "y": 5.547612425391122
+      },
+      "prevControl": {
+        "x": 2.059743175509098,
+        "y": 5.547612425364563
+      },
+      "nextControl": {
+        "x": 1.3674277229759237,
+        "y": 5.547612425396523
+      },
+      "isLocked": false,
+      "linkedName": "Speaker"
+    },
+    {
+      "anchor": {
+        "x": 2.147408380327451,
+        "y": 6.776081960714992
+      },
+      "prevControl": {
+        "x": 1.7476682934333114,
+        "y": 6.551837521732702
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "AmpNote"
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 0.5,
-      "rotationDegrees": 42.37359436170929,
-      "rotateFast": false
-    },
-    {
-      "waypointRelativePos": 0,
-      "rotationDegrees": 0,
-      "rotateFast": false
-    },
-    {
-      "waypointRelativePos": 0,
-      "rotationDegrees": 0,
-      "rotateFast": false
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 3.0,
-    "maxAcceleration": 3.0,
+    "maxVelocity": 4.4,
+    "maxAcceleration": 7.5,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 43.26429541107163,
+    "rotation": 12.528807709781782,
     "rotateFast": false
   },
   "reversed": false,
