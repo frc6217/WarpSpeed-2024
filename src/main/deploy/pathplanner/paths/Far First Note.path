@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.4259262722800992,
-        "y": 5.547612425391122
+        "x": 0.7726924717507405,
+        "y": 6.776081960714992
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.1084093474600265,
-        "y": 6.181346709486769
+        "x": 1.7476682934363517,
+        "y": 6.717583411413854
       },
       "isLocked": false,
       "linkedName": "Shoot Middle"
     },
     {
       "anchor": {
-        "x": 4.458101077722347,
-        "y": 6.4835892142093074
+        "x": 3.8146170354098436,
+        "y": 6.259344775221617
       },
       "prevControl": {
-        "x": 3.7566466534441068,
-        "y": 5.878412848165334
+        "x": 2.0011620070746092,
+        "y": 6.132597918402489
       },
       "nextControl": {
-        "x": 4.955338746782008,
-        "y": 6.912578575750977
+        "x": 5.799323336018151,
+        "y": 6.398060806984562
       },
       "isLocked": false,
       "linkedName": "Far MidPoint"
@@ -36,8 +36,8 @@
         "y": 7.439065519461206
       },
       "prevControl": {
-        "x": 6.505550303262128,
-        "y": 7.370817211943212
+        "x": 5.0235870543,
+        "y": 7.361067453726357
       },
       "nextControl": null,
       "isLocked": false,
@@ -59,8 +59,8 @@
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 4.4,
-    "maxAcceleration": 7.5,
+    "maxVelocity": 3.5,
+    "maxAcceleration": 6.5,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },
@@ -72,8 +72,8 @@
   "reversed": false,
   "folder": null,
   "previewStartingState": {
-    "rotation": 0,
+    "rotation": 60.255118703057704,
     "velocity": 0
   },
-  "useDefaultConstraints": true
+  "useDefaultConstraints": false
 }

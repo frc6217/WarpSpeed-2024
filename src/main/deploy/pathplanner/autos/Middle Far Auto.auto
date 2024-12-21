@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.7726924717507405,
-      "y": 6.776081960714992
+      "x": 1.3576779647621067,
+      "y": 5.547612425391122
     },
-    "rotation": 61.782644145270666
+    "rotation": 0
   },
   "command": {
     "type": "sequential",
@@ -20,7 +20,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Far First Note"
+            "pathName": "Middle to Far"
           }
         },
         {
@@ -32,31 +32,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Far First Note Return"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "autoShot"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "New New Path"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "autoCameraDriveToNote"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "AmpNoteToSpeaker"
+            "pathName": "Far to Middle"
           }
         },
         {

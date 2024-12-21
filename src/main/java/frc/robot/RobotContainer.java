@@ -51,10 +51,12 @@ import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.commands.PathPlannerAuto;
 import com.pathplanner.lib.path.PathPlannerPath;
+import com.pathplanner.lib.util.PathPlannerLogging;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -102,6 +104,11 @@ public class RobotContainer {
   public Command autoFindNoteClockWiseCommand = new CameraFindNote(swerveDrivetrain, noteFinderLimeLight, -1);
   public Command autoFindNoteCounterClockWiseCommand = new CameraFindNote(swerveDrivetrain, noteFinderLimeLight, 1);
 
+  public SendableChooser<String> autoChooser = new SendableChooser<>();
+  public final String autoTest = "Testing";
+  public final String auto2Test = "Testing2";
+  public final String auto3Test = "Testing3";
+
   public RobotContainer() {
     // Configure the trigger bindings
     semiAutoFactory = new SemiAutoFactory(this,hopperBeamBreak);
@@ -127,8 +134,10 @@ public class RobotContainer {
     NamedCommands.registerCommand("autoFindNoteCounterClockWise", autoFindNoteCounterClockWiseCommand);
     NamedCommands.registerCommand("shooterStart", autoCommandFactory.shooterStart());
    // NamedCommands.registerCommand("autoSpeakerLineUp", new CameraDrive(swerveDrivetrain, shooterLimeLight, SemiAutoConstants.speaker, this.intake, this.firstBeamBreak));
-
-
+    autoChooser.setDefaultOption(autoTest, autoTest); 
+    autoChooser.addOption(auto2Test, auto2Test);
+    autoChooser.addOption(auto3Test, auto3Test);
+    SmartDashboard.putData(autoChooser);
 
   }
 
@@ -285,8 +294,10 @@ public class RobotContainer {
      //PathPlannerAuto auto = new PathPlannerAuto("New Auto");
      //PathPlannerAuto auto = new PathPlannerAuto("OneNote");
      //PathPlannerAuto auto = new PathPlannerAuto("Far Auto"); //todo change to do multiple auto
-     PathPlannerAuto auto = new PathPlannerAuto("Testing");
+     PathPlannerAuto auto = new PathPlannerAuto(autoChooser.getSelected());
+     SmartDashboard.putString("Auto Selected", autoChooser.getSelected());
      return autoCommandFactory.AlwaysDo().andThen(auto);
+
     // An example command will be run in autonomous
   //return  autoCommandFactory.getAutoCommand();
   }

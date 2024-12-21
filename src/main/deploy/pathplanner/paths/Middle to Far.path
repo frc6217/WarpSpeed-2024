@@ -3,52 +3,34 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.2839049953634363,
-        "y": 4.280143857199829
+        "x": 1.3576779647621067,
+        "y": 5.547612425391122
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.332653786447717,
-        "y": 5.255119678885439
+        "x": 2.3576779647621064,
+        "y": 5.547612425391122
       },
       "isLocked": false,
-      "linkedName": "Stage Note"
+      "linkedName": null
     },
     {
       "anchor": {
-        "x": 1.4649253051475237,
-        "y": 5.518363150740554
+        "x": 7.607272981766866,
+        "y": 7.419566003027493
       },
       "prevControl": {
-        "x": 2.2351562042791553,
-        "y": 5.303868469969719
+        "x": 6.607272981766866,
+        "y": 7.419566003027493
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Speaker"
+      "linkedName": "Far to Middle"
     }
   ],
   "rotationTargets": [],
   "constraintZones": [],
-  "eventMarkers": [
-    {
-      "name": "New Event Marker",
-      "waypointRelativePos": 0,
-      "command": {
-        "type": "parallel",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "shooterStart"
-              }
-            }
-          ]
-        }
-      }
-    }
-  ],
+  "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 4.5,
     "maxAcceleration": 8.5,
@@ -63,7 +45,7 @@
   "reversed": false,
   "folder": null,
   "previewStartingState": {
-    "rotation": 0.0,
+    "rotation": 0,
     "velocity": 0
   },
   "useDefaultConstraints": true

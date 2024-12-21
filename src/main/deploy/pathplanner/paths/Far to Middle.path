@@ -3,49 +3,49 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.4649253051475237,
-        "y": 5.518363150740554
+        "x": 7.61,
+        "y": 7.41
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.6306711948340777,
-        "y": 5.537862667174266
+        "x": 4.253356155168368,
+        "y": 5.6743592822102515
       },
       "isLocked": false,
-      "linkedName": "Speaker"
+      "linkedName": "Middle to Far"
     },
     {
       "anchor": {
-        "x": 2.1864074131948756,
-        "y": 5.547612425391122
+        "x": 1.3966769976295312,
+        "y": 5.5768617000416905
       },
       "prevControl": {
-        "x": 1.87441515025548,
-        "y": 5.567111941824834
+        "x": 1.3576779647621067,
+        "y": 6.80533123536556
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "MiddleNotes2"
+      "linkedName": null
     }
   ],
   "rotationTargets": [],
   "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 9.0,
-    "maxAcceleration": 9.0,
+    "maxVelocity": 6.0,
+    "maxAcceleration": 6.5,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
-    "velocity": 0,
+    "velocity": 0.0,
     "rotation": 0,
     "rotateFast": false
   },
   "reversed": false,
   "folder": null,
   "previewStartingState": {
-    "rotation": 2.6630007660670474,
+    "rotation": 0,
     "velocity": 0
   },
   "useDefaultConstraints": false

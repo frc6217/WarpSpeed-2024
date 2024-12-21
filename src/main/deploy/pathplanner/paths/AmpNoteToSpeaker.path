@@ -4,24 +4,24 @@
     {
       "anchor": {
         "x": 2.147408380327451,
-        "y": 6.776081960714992
+        "y": 6.863829784666696
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.0986595892431703,
-        "y": 5.771856864378813
+        "x": 2.176657654978019,
+        "y": 5.372116777487712
       },
       "isLocked": false,
       "linkedName": "AmpNote"
     },
     {
       "anchor": {
-        "x": 1.4844248215812361,
-        "y": 5.547612425391122
+        "x": 1.4649253051475237,
+        "y": 5.518363150740554
       },
       "prevControl": {
-        "x": 2.293654753580292,
-        "y": 6.113098401968776
+        "x": 2.040161039942034,
+        "y": 5.732857831511389
       },
       "nextControl": null,
       "isLocked": false,
@@ -50,14 +50,14 @@
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 4.4,
-    "maxAcceleration": 7.5,
+    "maxVelocity": 4.5,
+    "maxAcceleration": 8.5,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0,
+    "rotation": 1.1233027140753893,
     "rotateFast": false
   },
   "reversed": false,

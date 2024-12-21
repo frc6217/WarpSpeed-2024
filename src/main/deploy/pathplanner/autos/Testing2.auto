@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.7726924717507405,
-      "y": 6.776081960714992
+      "x": 0.7531929553170285,
+      "y": 4.3386424065009646
     },
-    "rotation": 61.782644145270666
+    "rotation": -59.23728046576102
   },
   "command": {
     "type": "sequential",
@@ -20,7 +20,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Far First Note"
+            "pathName": "Source Side Note"
           }
         },
         {
@@ -32,7 +32,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Far First Note Return"
+            "pathName": "Source Side Note Return"
           }
         },
         {
@@ -44,7 +44,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "New New Path"
+            "pathName": "Second Source Side Note"
           }
         },
         {
@@ -56,7 +56,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "AmpNoteToSpeaker"
+            "pathName": "Second Source Side Note Return"
           }
         },
         {
