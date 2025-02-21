@@ -62,7 +62,7 @@ public class Drive extends Command {
     // if there is input from the joysticks (any of them) then drive
     // if not then IF enable X mode is true, then go to X
     // else do nothing
-    swerveDrivetrain.drive(new Translation2d(getTranslation(), getStrafe()).times(swerveDrivetrain.governor.getGovernor()*Constants.RobotConstants.driveMaxVelo), getRotation()*(Constants.RobotConstants.rotationMaxAngleVelo*swerveDrivetrain.governor.getGovernor()));
+    swerveDrivetrain.drive(new Translation2d(getTranslation(), getStrafe()).times(swerveDrivetrain.governor.getGovernor()*Constants.RobotConstants.driveMaxVelo), getRotation()*.5*(Constants.RobotConstants.rotationMaxAngleVelo*swerveDrivetrain.governor.getGovernor()));
     SmartDashboard.putNumber("Pigeon Angle", swerveDrivetrain.getAngle());
   }
 

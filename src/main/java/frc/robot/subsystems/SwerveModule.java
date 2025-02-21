@@ -230,6 +230,7 @@ public class SwerveModule extends SubsystemBase{
         syncTimer.restart();
       }
     }
+    SmartDashboard.putNumber(name + " abs encoder", absEncoder.getRawValue());
 
     // if abs enc value and relative enc val is not within ~5% then log an error
    // if((absEncoder.getAngle().getRadians() - getSteerPosition())/getSteerPosition() >= 0.05) {

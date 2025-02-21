@@ -57,10 +57,10 @@ public class SwerveDrivetrain extends SubsystemBase {
   public boolean isAbsolute = true;
 
   public Governor governor = new Governor();
-  LimeLightLocal limeLight;
-  public SwerveDrivetrain(CommandXboxController cx, LimeLightLocal limeLight) {
+  
+  public SwerveDrivetrain(CommandXboxController cx) {
 
-    this.limeLight = limeLight;
+
     SmartDashboard.putNumber("Auto xPID P", 0.1);
     SmartDashboard.putNumber("Auto yPID P", 0.1);
     SmartDashboard.putNumber("Auto rotationPID P", 0);
@@ -218,59 +218,6 @@ public class SwerveDrivetrain extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     sOdometry.update(getGyroRotation2d(), getModulePositions());
-    if(limeLight.getBlueEstimate().tagCount >= 2)
-   {
-     sOdometry.setVisionMeasurementStdDevs(VecBuilder.fill(.7,.7,9999999));
-     sOdometry.addVisionMeasurement(
-         limeLight.getBlueEstimate().pose,
-         limeLight.getBlueEstimate().timestampSeconds);
-   }
-   /*
-    * boolean useMegaTag2 = true; //set to false to use MegaTag1
-    
-    if(useMegaTag2 == false) */
-    boolean doRejectUpdate = false;
-    {}
-      LimelightHelpers.PoseEstimate mt1 = LimelightHelpers.getBotPoseEstimate_wpiBlue("limelight");
-      
-      if(mt1.tagCount == 1 && mt1.rawFiducials.length == 1)
-      {
-        if(mt1.rawFiducials[0].ambiguity > .7)
-        {
-          doRejectUpdate = true;
-        }
-        if(mt1.rawFiducials[0].distToCamera > 3)
-        {
-          doRejectUpdate = true;
-        }
-      }
-      if(mt1.tagCount == 0)
-      {
-        doRejectUpdate = true;
-      }
-
-      if(!doRejectUpdate)
-      {/*
-        m_poseEstimator.setVisionMeasurementStdDevs(VecBuilder.fill(.5,.5,9999999));
-        m_poseEstimator.addVisionMeasurement(
-            mt1.pose,
-            mt1.timestampSeconds);
-          mt1.pose.getX();*/
-      }
-      
-      
-      if(mt1.tagCount == 0){
-        x = x;
-        y = y;
-      }else{
-        if(debouncer.calculate(mt1.tagCount == 1)){
-        x =  LimelightHelpers.getBotPose2d_wpiRed("limelight").getX() - 1.44;
-        y = LimelightHelpers.getBotPose2d_wpiRed("limelight").getY() - 2.69;
-    
-        sOdometry.resetPosition(getGyroRotation2d(), getModulePositions(), new Pose2d(x, y, getGyroRotation2d()));
-        ;
-        }
-      }
       SmartDashboard.putNumber("limelight X",Units.metersToFeet(x));
       SmartDashboard.putNumber("limelight Y",Units.metersToFeet(y));
       SmartDashboard.putNumber("Odometry pose X: ", Units.metersToFeet(sOdometry.getEstimatedPosition().getX()));

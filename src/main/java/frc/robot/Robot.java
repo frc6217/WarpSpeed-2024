@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.commands.SetLedDisabled;
 import frc.robot.commands.brakeCommands.EnableBrakes;
 import frc.robot.commands.brakeCommands.UnenableBrakes;
 
@@ -42,7 +41,7 @@ public class Robot extends TimedRobot {
     // Commands.runOnce(m_robotContainer.swerveDrivetrain::enableBrakes, m_robotContainer.swerveDrivetrain).schedule();
 
     // new Trigger(this::isEnabled).onTrue(Commands.runOnce(m_robotContainer.intake::ledNoNote, m_robotContainer.intake));
-     new Trigger(this::isEnabled).negate().onTrue(new SetLedDisabled(m_robotContainer.intake));
+   
 
 
      FollowPathCommand.warmupCommand().schedule();
@@ -58,8 +57,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    SmartDashboard.putBoolean("Hopper Beam Break", m_robotContainer.hopperBeamBreak.get());
-    SmartDashboard.putBoolean("First Beam Break", m_robotContainer.firstBeamBreak.get());
+   
     // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
     // commands, running already-scheduled commands, removing finished or interrupted commands,
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
